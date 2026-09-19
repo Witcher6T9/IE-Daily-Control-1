@@ -422,3 +422,47 @@ textarea:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Mobile (Android & iOS) UX polish ---- */
+
+/* Keep Safari from inflating text in landscape/overview mode. */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Disable Android pull-to-refresh and rubber-band chaining on the app shell. */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* App-like taps: no gray flash, no 300ms double-tap-zoom delay. */
+button,
+[role='button'],
+a,
+label {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Notch / status-bar safe areas (requires viewport-fit=cover). */
+.cockpit-header {
+  padding-top: env(safe-area-inset-top);
+}
+
+.cockpit-drawer {
+  padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 767px) {
+  /* Keep the footer clear of the bottom nav + home indicator. */
+  .cockpit-footer {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+
+  /* iOS Safari auto-zooms on focus when a field is under 16px. */
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
