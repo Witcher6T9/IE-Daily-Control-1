@@ -51,7 +51,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   onNavigate,
   onSelectLine,
   checklistCompletion,
-  checklistCounts = { done: 0, pending: 12, notDone: 0, total: 12 },
+  checklistCounts = { done: 0, pending: 25, notDone: 0, total: 25 },
   profile,
   onOpenUserModal,
   onOpenScorecard,

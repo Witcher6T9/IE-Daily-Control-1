@@ -22,7 +22,11 @@ import {
   FileSpreadsheet
 } from 'lucide-react';
 import { ChecklistMap, ChecklistStatus, UserProfile } from '../types';
-import { IE_12_TASKS } from '../mockData';
+import {
+  CHECKLIST_TASK_COUNT,
+  IE_DAILY_TASKS,
+  normalizeChecklistStatuses
+} from '../mockData';
 import { downloadCSV, formatDateLabel, getTodayDateStr } from '../utils';
 
 interface MonthlyAuditCalendarProps {
@@ -114,12 +118,12 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
       const dateStr = `${viewYear}-${String(viewMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
       const dayOfWeek = new Date(viewYear, viewMonth, day).getDay();
       const isWeekend = dayOfWeek === 0 || dayOfWeek === 5; // Sunday or Friday
-      const statuses = checklists[dateStr] || Array(12).fill('pending');
+      const statuses = normalizeChecklistStatuses(checklists[dateStr]);
       const hasAudit = !!checklists[dateStr];
       const doneCount = statuses.filter(s => s === 'yes').length;
       const pendingCount = statuses.filter(s => s === 'pending').length;
       const noCount = statuses.filter(s => s === 'no').length;
-      const compliancePct = Math.round((doneCount / 12) * 100);
+      const compliancePct = Math.round((doneCount / CHECKLIST_TASK_COUNT) * 100);
 
       cells.push({
         day,
@@ -144,9 +148,9 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
   const monthlyStats = useMemo(() => {
     const auditedDays = calendarCells.filter(c => c.hasAudit && c.doneCount > 0);
     const totalDone = auditedDays.reduce((acc, c) => acc + c.doneCount, 0);
-    const totalCheckpoints = auditedDays.length * 12;
+    const totalCheckpoints = auditedDays.length * CHECKLIST_TASK_COUNT;
     const avgCompliance = totalCheckpoints > 0 ? Math.round((totalDone / totalCheckpoints) * 100) : 0;
-    const perfectDays = calendarCells.filter(c => c.doneCount === 12).length;
+    const perfectDays = calendarCells.filter(c => c.doneCount === CHECKLIST_TASK_COUNT).length;
     const actionNeededDays = calendarCells.filter(c => c.noCount > 0).length;
 
     return {
@@ -163,7 +167,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
     const found = calendarCells.find(c => c.dateStr === activeDate);
     if (found) return found;
 
-    const statuses = checklists[activeDate] || Array(12).fill('pending');
+    const statuses = normalizeChecklistStatuses(checklists[activeDate]);
     return {
       day: parseInt(activeDate.split('-')[2] || '1', 10),
       dateStr: activeDate,
@@ -172,7 +176,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
       doneCount: statuses.filter(s => s === 'yes').length,
       pendingCount: statuses.filter(s => s === 'pending').length,
       noCount: statuses.filter(s => s === 'no').length,
-      compliancePct: Math.round((statuses.filter(s => s === 'yes').length / 12) * 100),
+      compliancePct: Math.round((statuses.filter(s => s === 'yes').length / CHECKLIST_TASK_COUNT) * 100),
       hasAudit: !!checklists[activeDate],
       isToday: activeDate === todayStr,
       isSelected: true,
@@ -206,7 +210,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
       'Pending Tasks',
       'Marked Deficient',
       'Compliance %',
-      ...IE_12_TASKS.map(t => `Task ${t.id}: ${t.title}`)
+      ...IE_DAILY_TASKS.map(t => `Task ${t.id}: ${t.title}`)
     ];
 
     const rows = calendarCells.map(c => {
@@ -246,7 +250,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
               Monthly Activity & Audit Log
             </h1>
             <p className="text-xs sm:text-sm text-[#527078] mt-1">
-              Calendar tracking of the 12-Task IE Daily Control Checklist, auditor verification trails, and floor compliance trends.
+              Calendar tracking of the {CHECKLIST_TASK_COUNT}-Task IE Daily Control Checklist, auditor verification trails, and floor compliance trends.
             </p>
           </div>
 
@@ -336,7 +340,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
               {monthlyStats.perfectDays}
             </div>
             <span className="text-[10px] text-emerald-600 font-medium">
-              12 of 12 Tasks Signed Off
+              {CHECKLIST_TASK_COUNT} of {CHECKLIST_TASK_COUNT} Tasks Signed Off
             </span>
           </div>
 
@@ -484,7 +488,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
 
                 {/* Bottom text info */}
                 <div className="flex items-center justify-between text-[9px] text-[#527078] font-mono-numbers">
-                  <span>{cell.doneCount}/12 Done</span>
+                  <span>{cell.doneCount}/{CHECKLIST_TASK_COUNT} Done</span>
                   {cell.noCount > 0 && (
                     <span className="text-rose-600 font-bold flex items-center">
                       • {cell.noCount} No
@@ -550,10 +554,10 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
               </div>
               <div className="text-[11px] text-[#527078] mt-0.5">
                 Audit Timestamp: Verified at 17:30 BST • Status:{' '}
-                <strong className={activeDayData.doneCount === 12 ? 'text-emerald-700' : 'text-amber-700'}>
-                  {activeDayData.doneCount === 12
+                <strong className={activeDayData.doneCount === CHECKLIST_TASK_COUNT ? 'text-emerald-700' : 'text-amber-700'}>
+                  {activeDayData.doneCount === CHECKLIST_TASK_COUNT
                     ? '100% Standard Compliance Verified'
-                    : `${activeDayData.doneCount} of 12 Tasks Verified (${activeDayData.pendingCount} Pending)`}
+                    : `${activeDayData.doneCount} of ${CHECKLIST_TASK_COUNT} Tasks Verified (${activeDayData.pendingCount} Pending)`}
                 </strong>
               </div>
             </div>
@@ -569,14 +573,14 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
           </div>
         </div>
 
-        {/* 12-Task Audit Breakdown Table */}
+        {/* Full IE + SL audit breakdown table */}
         <div className="space-y-2">
           <div className="text-xs font-bold uppercase tracking-wider text-[#527078] mb-1">
-            Standard 12 IE Inspection Checkpoints for this Date:
+            Standard IE + SL Inspection Checkpoints for this Date:
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {IE_12_TASKS.map((task, idx) => {
+            {IE_DAILY_TASKS.map((task, idx) => {
               const status: ChecklistStatus = activeDayData.statuses[idx] || 'pending';
               const isYes = status === 'yes';
               const isNo = status === 'no';

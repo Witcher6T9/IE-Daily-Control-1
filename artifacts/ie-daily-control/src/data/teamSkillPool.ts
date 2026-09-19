@@ -18,7 +18,7 @@ export const CANDIDATE_TEAM_POOL: CandidateTeamMember[] = [
     attendancePct: 98.8,
     specialties: ['Knit Polo Shirts', 'High-Speed Single Jersey', 'Line Balancing Pacing', 'Quick Style Changeover'],
     machineCompetencies: ['Single Needle Lockstitch (SNLS)', 'Overlock 4-Thread', 'Pneumatic Folder'],
-    criticalOperations: ['Line Pacing & Pitch Flow', 'Collar & Cuff Insertion', 'Daily 12-Task IE Review'],
+    criticalOperations: ['Line Pacing & Pitch Flow', 'Collar & Cuff Insertion', 'Daily IE + SL Review'],
     preferredShifts: ['Shift 01 (General)', 'Shift 02 (Evening)'],
     contact: '+880 1711-209841',
     status: 'Available'

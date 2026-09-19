@@ -11,7 +11,8 @@ import {
   ScheduleItem,
   LeanMethod,
   LeanActionItem,
-  NotificationItem
+  NotificationItem,
+  ChecklistStatus
 } from './types';
 
 export const ROLE_TIERS: RoleTier[] = [
@@ -181,6 +182,94 @@ export const IE_12_TASKS = [
     hint: 'Reconcile total pieces produced, calculate earned hours, and record closing line remarks.'
   }
 ];
+
+export const SL_TASKS = [
+  {
+    id: 13,
+    category: 'SL Control',
+    title: 'Learning Curve Plan',
+    hint: 'Set the style ramp-up plan, daily efficiency milestones, operator loading, and review owners.'
+  },
+  {
+    id: 14,
+    category: 'SL Control',
+    title: 'Line Balancing Graph (1st Day Output - 2nd Day Completion)',
+    hint: 'Compare first-day output against second-day completion and record the balancing actions needed to close the gap.'
+  },
+  {
+    id: 15,
+    category: 'SL Control',
+    title: 'Learning Curve First 3 Days (Pick Target 70% Production)',
+    hint: 'Verify the first three-day learning curve and confirm the 70% production pick target is realistic.'
+  },
+  {
+    id: 16,
+    category: 'SL Control',
+    title: 'Line Balancing Graph - 4th Day',
+    hint: 'Review the fourth-day balance graph, cycle-time spread, and any remaining overloaded operations.'
+  },
+  {
+    id: 17,
+    category: 'SL Control',
+    title: 'Line Estimate Report (6-7 Day)',
+    hint: 'Prepare the six-to-seven-day line estimate using output, efficiency, manpower, and learning-curve evidence.'
+  },
+  {
+    id: 18,
+    category: 'SL Control',
+    title: 'Line Study & Bottleneck Flow Analysis',
+    hint: 'Study the line flow, isolate the bottleneck operation, and document the countermeasure path.'
+  },
+  {
+    id: 19,
+    category: 'SL Control',
+    title: 'Next Style Input Date File Submit (Before 10 Days)',
+    hint: 'Submit the next-style input date file at least ten days before changeover and flag missing inputs.'
+  },
+  {
+    id: 20,
+    category: 'SL Control',
+    title: 'T.R Sample Make Follow-up Update',
+    hint: 'Follow up on the T.R sample make, capture the latest status, and record open technical actions.'
+  },
+  {
+    id: 21,
+    category: 'SL Control',
+    title: 'Floor Status Update',
+    hint: 'Update floor status across active lines, manpower, machines, WIP, quality, and immediate risks.'
+  },
+  {
+    id: 22,
+    category: 'SL Control',
+    title: 'Individual Operator Performance Tracking',
+    hint: 'Track operator performance, attendance, skill progression, and support needs at critical stations.'
+  },
+  {
+    id: 23,
+    category: 'SL Control',
+    title: 'Kaizen Work / Continuous Improvement',
+    hint: 'Log the active Kaizen or continuous-improvement work, owner, expected benefit, and verification date.'
+  },
+  {
+    id: 24,
+    category: 'SL Control',
+    title: 'Running Line Efficiency % & Production',
+    hint: 'Record running line efficiency and production against target for the current shift.'
+  },
+  {
+    id: 25,
+    category: 'SL Control',
+    title: 'Tomorrow Target Forecast Report',
+    hint: 'Forecast tomorrow’s target using current output, learning curve, manpower, style readiness, and constraints.'
+  }
+] as const;
+
+export const IE_DAILY_TASKS = [...IE_12_TASKS, ...SL_TASKS];
+export const CHECKLIST_TASK_COUNT = IE_DAILY_TASKS.length;
+
+export function normalizeChecklistStatuses(statuses?: ChecklistStatus[]): ChecklistStatus[] {
+  return Array.from({ length: CHECKLIST_TASK_COUNT }, (_, index) => statuses?.[index] ?? 'pending');
+}
 
 export const LEAN_METHODS: LeanMethod[] = [
   {
@@ -505,6 +594,232 @@ export const INITIAL_TODOS: TodoItem[] = [
   }
 ];
 
+const SL_TODO_DATE = new Date().toISOString().slice(0, 10);
+
+export const SL_TASK_TODOS: TodoItem[] = [
+  {
+    id: 'sl-task-1',
+    title: 'Learning Curve Plan',
+    description: 'Set the style ramp-up plan, daily efficiency milestones, operator loading, and review owners.',
+    category: 'line_balancing',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '09:30 AM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-2',
+    title: 'Line Balancing Graph (1st Day Output - 2nd Day Completion)',
+    description: 'Compare first-day output against second-day completion and record the balancing actions needed to close the gap.',
+    category: 'line_balancing',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '10:00 AM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Manager',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-3',
+    title: 'Learning Curve First 3 Days (Pick Target 70% Production)',
+    description: 'Verify the first three-day learning curve and confirm the 70% production pick target is realistic.',
+    category: 'line_balancing',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '10:30 AM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Manager',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-4',
+    title: 'Line Balancing Graph - 4th Day',
+    description: 'Review the fourth-day balance graph, cycle-time spread, and remaining overloaded operations.',
+    category: 'line_balancing',
+    priority: 'medium',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '11:00 AM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'IE Manager',
+    assignedByName: 'Fahim Ahmed',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-5',
+    title: 'Line Estimate Report (6-7 Day)',
+    description: 'Prepare the six-to-seven-day line estimate using output, efficiency, manpower, and learning-curve evidence.',
+    category: 'general',
+    priority: 'medium',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '11:30 AM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Manager',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-6',
+    title: 'Line Study & Bottleneck Flow Analysis',
+    description: 'Study the line flow, isolate the bottleneck operation, and document the countermeasure path.',
+    category: 'bottleneck_study',
+    priority: 'urgent',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '12:00 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Assistant Manager',
+    assignedToName: 'Sultan Mahmud',
+    assignedByRole: 'IE Manager',
+    assignedByName: 'Fahim Ahmed',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-7',
+    title: 'Next Style Input Date File Submit (Before 10 Days)',
+    description: 'Submit the next-style input date file at least ten days before changeover and flag missing inputs.',
+    category: 'line_balancing',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '01:00 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'IE Manager',
+    assignedByName: 'Fahim Ahmed',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-8',
+    title: 'T.R Sample Make Follow-up Update',
+    description: 'Follow up on the T.R sample make, capture the latest status, and record open technical actions.',
+    category: 'tr_sample',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '01:30 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-9',
+    title: 'Floor Status Update',
+    description: 'Update floor status across active lines, manpower, machines, WIP, quality, and immediate risks.',
+    category: 'general',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '02:00 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'IE Manager',
+    assignedByName: 'Fahim Ahmed',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-10',
+    title: 'Individual Operator Performance Tracking',
+    description: 'Track operator performance, attendance, skill progression, and support needs at critical stations.',
+    category: 'kaizen_ci',
+    priority: 'medium',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '02:30 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'IE Assistant Manager',
+    assignedByName: 'Sultan Mahmud',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-11',
+    title: 'Kaizen Work / Continuous Improvement',
+    description: 'Log the active Kaizen or continuous-improvement work, owner, expected benefit, and verification date.',
+    category: 'kaizen_ci',
+    priority: 'medium',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '03:00 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Assistant Manager',
+    assignedToName: 'Sultan Mahmud',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-12',
+    title: 'Running Line Efficiency % & Production',
+    description: 'Record running line efficiency and production against target for the current shift.',
+    category: 'general',
+    priority: 'urgent',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '04:00 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'Line IE Officer',
+    assignedToName: 'IE Team',
+    assignedByRole: 'IE Manager',
+    assignedByName: 'Fahim Ahmed',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'sl-task-13',
+    title: 'Tomorrow Target Forecast Report',
+    description: 'Forecast tomorrow’s target using current output, learning curve, manpower, style readiness, and constraints.',
+    category: 'general',
+    priority: 'high',
+    status: 'pending',
+    targetDate: SL_TODO_DATE,
+    dueTime: '04:30 PM',
+    lineNo: 'All Lines',
+    assignedToRole: 'IE Manager',
+    assignedToName: 'IE Team',
+    assignedByRole: 'Head of Department (HOD)',
+    assignedByName: 'Ashik Hossain',
+    subtasks: [],
+    createdAt: new Date().toISOString()
+  }
+];
+
 export const INITIAL_SCHEDULES: ScheduleItem[] = [
   {
     id: 'sched-1',
@@ -623,8 +938,8 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   },
   {
     id: 'notif-3',
-    title: '12-Task IE Daily Checklist Pending',
-    message: '5 tasks remaining for today inspection sign-off. Please complete before 05:00 PM.',
+    title: 'IE + SL Daily Checklist Pending',
+    message: 'Tasks remain for today’s inspection sign-off. Please complete before 05:00 PM.',
     type: 'todo',
     timestamp: '01:00 PM',
     read: false

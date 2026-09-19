@@ -5,6 +5,7 @@
 
 import { LineEntry, ChecklistMap, ChecklistStatus, ScorecardResult } from './types';
 import { generateLineLearningCurve, calculateBalancingLossAnalysis } from './data/learningCurveMatrix';
+import { CHECKLIST_TASK_COUNT, normalizeChecklistStatuses } from './mockData';
 
 // Format helper
 export function getTodayDateStr(): string {
@@ -965,8 +966,8 @@ export function calculateScorecardMetrics(
   );
 
   // 2. Checklist Pillar
-  const currentStatuses = checklists[selectedDate] || Array(12).fill('pending');
-  const totalTasks = currentStatuses.length || 12;
+  const currentStatuses = normalizeChecklistStatuses(checklists[selectedDate]);
+  const totalTasks = CHECKLIST_TASK_COUNT;
   const completedTasks = currentStatuses.filter(s => s === 'yes').length;
   const pendingTasks = currentStatuses.filter(s => s === 'pending').length;
   const notDoneTasks = currentStatuses.filter(s => s === 'no').length;

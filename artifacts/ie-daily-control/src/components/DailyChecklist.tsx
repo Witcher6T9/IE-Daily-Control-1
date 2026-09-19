@@ -17,7 +17,7 @@ import {
   ClipboardList
 } from 'lucide-react';
 import { ChecklistMap, ChecklistStatus, UserProfile } from '../types';
-import { IE_12_TASKS } from '../mockData';
+import { CHECKLIST_TASK_COUNT, IE_DAILY_TASKS, normalizeChecklistStatuses } from '../mockData';
 import { formatDateLabel, getOffsetDateStr } from '../utils';
 
 interface DailyChecklistProps {
@@ -47,12 +47,12 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
     5: 'Stopwatch study completed on collar attach station.'
   });
 
-  const currentStatuses: ChecklistStatus[] = checklists[selectedDate] || Array(12).fill('pending');
+  const currentStatuses: ChecklistStatus[] = normalizeChecklistStatuses(checklists[selectedDate]);
 
   const completedCount = currentStatuses.filter(s => s === 'yes').length;
   const pendingCount = currentStatuses.filter(s => s === 'pending').length;
   const noCount = currentStatuses.filter(s => s === 'no').length;
-  const completionPercentage = Math.round((completedCount / 12) * 100);
+  const completionPercentage = Math.round((completedCount / CHECKLIST_TASK_COUNT) * 100);
 
   const handleNoteChange = (idx: number, text: string) => {
     setTaskNotes(prev => ({ ...prev, [idx]: text }));
@@ -79,11 +79,11 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
   };
 
   const markAllYes = () => {
-    onBatchUpdateChecklist(selectedDate, Array(12).fill('yes'));
+    onBatchUpdateChecklist(selectedDate, Array(CHECKLIST_TASK_COUNT).fill('yes'));
   };
 
   const resetAll = () => {
-    onBatchUpdateChecklist(selectedDate, Array(12).fill('pending'));
+    onBatchUpdateChecklist(selectedDate, Array(CHECKLIST_TASK_COUNT).fill('pending'));
   };
 
   return (
@@ -96,7 +96,7 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
               <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#dceceb] text-[#176f78]">
                 Industrial Engineering Daily Standard
               </span>
-              <span className="text-xs text-[#527078]">12-Task Inspection Protocol</span>
+              <span className="text-xs text-[#527078]">{CHECKLIST_TASK_COUNT}-Task Inspection Protocol</span>
             </div>
             <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight">
               IE Daily Control Checklist
@@ -156,21 +156,21 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
                 <span className="text-[#176f78] font-mono-numbers font-black">{completionPercentage}%</span>
               </span>
               <span className="text-[#527078] font-mono-numbers text-[11px]">
-                {completedCount}/12 Tasks Done
+                 {completedCount}/{CHECKLIST_TASK_COUNT} Tasks Done
               </span>
             </div>
             <div className="h-2.5 w-full rounded-full bg-[#f1eee6] overflow-hidden flex">
               <div
                 className="h-full bg-[#176f78] transition-all duration-300"
-                style={{ width: `${(completedCount / 12) * 100}%` }}
+                 style={{ width: `${(completedCount / CHECKLIST_TASK_COUNT) * 100}%` }}
               ></div>
               <div
                 className="h-full bg-amber-400 transition-all duration-300"
-                style={{ width: `${(pendingCount / 12) * 100}%` }}
+                 style={{ width: `${(pendingCount / CHECKLIST_TASK_COUNT) * 100}%` }}
               ></div>
               <div
                 className="h-full bg-rose-400 transition-all duration-300"
-                style={{ width: `${(noCount / 12) * 100}%` }}
+                 style={{ width: `${(noCount / CHECKLIST_TASK_COUNT) * 100}%` }}
               ></div>
             </div>
             <div className="flex items-center gap-3 text-[10px] font-mono-numbers mt-1 text-[#527078]">
@@ -205,9 +205,9 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
         </div>
       </div>
 
-      {/* 12 Tasks Cards Grid */}
+       {/* Full IE + SL task cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {IE_12_TASKS.map((task, idx) => {
+        {IE_DAILY_TASKS.map((task, idx) => {
           const status = currentStatuses[idx] || 'pending';
 
           return (
@@ -228,7 +228,11 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
                   </span>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#527078] bg-[#f1eee6] px-1.5 py-0.2 rounded">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded ${
+                        task.category === 'SL Control'
+                          ? 'bg-[#fff2cf] text-[#946200]'
+                          : 'bg-[#f1eee6] text-[#527078]'
+                      }`}>
                         {task.category}
                       </span>
                     </div>

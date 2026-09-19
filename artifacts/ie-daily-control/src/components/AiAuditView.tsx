@@ -165,7 +165,7 @@ export const AiAuditView: React.FC<AiAuditViewProps> = ({
       } else if (selectedScope === 'line_health') {
         scopeSummary = `Line Health Matrix: Assessed 5 operational sewing lines. Lines 20, 21, and 24 exhibit healthy takt-time alignment. Line ${lowestLine?.lineNo} shows operator idle waiting time of 3.8 minutes per bundle cycle.`;
       } else if (selectedScope === 'checklist_compliance') {
-        scopeSummary = `IE Protocol & 12-Task Checklist: Daily shift audits show 89.2% adherence. Needle detector logs, hourly monitoring boards, and 5S bin clearouts verified for Morning and Afternoon shifts.`;
+        scopeSummary = `IE + SL Protocol: Daily shift audits show 89.2% adherence. Needle detector logs, hourly monitoring boards, and 5S bin clearouts verified for Morning and Afternoon shifts.`;
       } else {
         scopeSummary = `Bottleneck & Balancing Audit: Line ${lowestLine?.lineNo} station '${lowestLine?.bottleneck?.station || 'Station 6'}' is operating at ${lowestLine?.bottleneck?.cycleTime || 42}s against target ${lowestLine?.bottleneck?.targetCT || 38}s.`;
       }
@@ -391,7 +391,7 @@ ${auditReport.kaizenPlan.map(k => `[${k.priority}] ${k.task} (Expected: ${k.impa
           {[
             { id: 'monthly_kpi', label: 'Monthly KPI & Output Trends' },
             { id: 'line_health', label: 'Line-by-Line Health Matrix' },
-            { id: 'checklist_compliance', label: '12-Task IE Compliance' },
+            { id: 'checklist_compliance', label: 'IE + SL Checklist Compliance' },
             { id: 'bottleneck_balancing', label: 'Bottlenecks & Pitch Time' }
           ].map(scope => (
             <button

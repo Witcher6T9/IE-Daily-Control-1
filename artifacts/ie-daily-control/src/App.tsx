@@ -35,11 +35,14 @@ import {
 } from './types';
 import {
   INITIAL_TODOS,
+  SL_TASK_TODOS,
   INITIAL_SCHEDULES,
   INITIAL_LEAN_ACTIONS,
   DEFAULT_USER_PROFILE,
   DEFAULT_DASHBOARD_LAYOUT,
-  INITIAL_NOTIFICATIONS
+  INITIAL_NOTIFICATIONS,
+  CHECKLIST_TASK_COUNT,
+  normalizeChecklistStatuses
 } from './mockData';
 import {
   generateDefaultLineEntries,
@@ -114,9 +117,19 @@ export default function App() {
   const [todos, setTodos] = useState<TodoItem[]>(() => {
     try {
       const saved = localStorage.getItem('ie_todos_data');
-      return saved ? JSON.parse(saved) : INITIAL_TODOS;
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const existingIds = new Set(parsed.map((todo: TodoItem) => todo.id));
+          return [
+            ...parsed,
+            ...SL_TASK_TODOS.filter(todo => !existingIds.has(todo.id))
+          ];
+        }
+      }
+      return [...INITIAL_TODOS, ...SL_TASK_TODOS];
     } catch {
-      return INITIAL_TODOS;
+      return [...INITIAL_TODOS, ...SL_TASK_TODOS];
     }
   });
 
@@ -313,11 +326,11 @@ export default function App() {
   }, [lines]);
 
   // Today checklist completion calculation
-  const todayStatuses = checklists[todayStr] || Array(12).fill('pending');
+  const todayStatuses = normalizeChecklistStatuses(checklists[todayStr]);
   const todayDone = todayStatuses.filter(s => s === 'yes').length;
   const todayPending = todayStatuses.filter(s => s === 'pending').length;
   const todayNotDone = todayStatuses.filter(s => s === 'no').length;
-  const checklistCompletionPct = Math.round((todayDone / 12) * 100);
+  const checklistCompletionPct = Math.round((todayDone / CHECKLIST_TASK_COUNT) * 100);
 
   // Pending todos count
   const pendingTodosCount = todos.filter(t => t.status !== 'completed').length;
@@ -325,7 +338,7 @@ export default function App() {
 
   // Handlers
   const handleUpdateChecklistTask = (date: string, idx: number, status: ChecklistStatus) => {
-    const current = checklists[date] || Array(12).fill('pending');
+    const current = normalizeChecklistStatuses(checklists[date]);
     const updated = [...current];
     updated[idx] = status;
     setChecklists(prev => ({ ...prev, [date]: updated }));
@@ -593,7 +606,7 @@ export default function App() {
               done: todayDone,
               pending: todayPending,
               notDone: todayNotDone,
-              total: 12
+              total: CHECKLIST_TASK_COUNT
             }}
             profile={profile}
             onOpenUserModal={() => setIsUserModalOpen(true)}
