@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "IE Daily Control"
+description = "A garment industrial engineering control center for tracking daily line efficiency, manpower, bottlenecks, checklists, factory KPIs, and simulator scenarios."
+version = "1.0.0"
+id = "artifacts/ie-daily-control"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25089
+
+[services.development]
+run = "pnpm --filter @workspace/ie-daily-control run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ie-daily-control", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/ie-daily-control/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25089"
+BASE_PATH = "/"

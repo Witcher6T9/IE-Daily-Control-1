@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: 42 24% 94%;
+  --foreground: 193 39% 17%;
+  --card: 43 29% 97%;
+  --card-foreground: 193 39% 17%;
+  --popover: 43 29% 97%;
+  --popover-foreground: 193 39% 17%;
+  --primary: 188 73% 27%;
+  --primary-foreground: 42 24% 96%;
+  --secondary: 40 24% 89%;
+  --secondary-foreground: 193 39% 17%;
+  --muted: 40 18% 87%;
+  --muted-foreground: 193 17% 42%;
+  --accent: 31 88% 58%;
+  --accent-foreground: 193 39% 17%;
+  --destructive: 4 71% 50%;
+  --destructive-foreground: 42 24% 96%;
+  --border: 40 21% 82%;
+  --input: 40 21% 82%;
+  --ring: 188 73% 27%;
+  --radius: 0.75rem;
+  --font-body-family: 'IBM Plex Sans', ui-sans-serif, sans-serif;
+  --font-display-family: 'Barlow Condensed', 'IBM Plex Sans', sans-serif;
+  --font-mono-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+[data-theme='dark'] {
+  --background: 193 32% 12%;
+  --foreground: 42 24% 92%;
+  --card: 193 29% 16%;
+  --card-foreground: 42 24% 92%;
+  --popover: 193 29% 16%;
+  --popover-foreground: 42 24% 92%;
+  --primary: 184 52% 48%;
+  --primary-foreground: 193 39% 12%;
+  --secondary: 193 25% 22%;
+  --secondary-foreground: 42 24% 92%;
+  --muted: 193 24% 23%;
+  --muted-foreground: 192 14% 68%;
+  --accent: 31 88% 60%;
+  --accent-foreground: 193 39% 12%;
+  --destructive: 4 71% 58%;
+  --destructive-foreground: 42 24% 96%;
+  --border: 193 23% 28%;
+  --input: 193 23% 28%;
+  --ring: 184 52% 48%;
+}
+
+[data-theme='forest'] {
+  --background: 145 28% 93%;
+  --foreground: 160 36% 17%;
+  --primary: 158 57% 27%;
+  --primary-foreground: 145 28% 97%;
+  --accent: 42 81% 51%;
+  --border: 145 17% 79%;
+}
+
+[data-theme='sunset'] {
+  --background: 36 44% 94%;
+  --foreground: 20 37% 21%;
+  --primary: 20 63% 37%;
+  --primary-foreground: 36 44% 97%;
+  --accent: 39 89% 52%;
+  --border: 34 25% 81%;
+}
+
+[data-theme='industrial'] {
+  --background: 207 20% 91%;
+  --foreground: 210 28% 18%;
+  --primary: 203 54% 30%;
+  --primary-foreground: 207 20% 97%;
+  --accent: 35 86% 52%;
+  --border: 207 14% 77%;
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --font-sans: var(--font-body-family);
+  --font-display: var(--font-display-family);
+  --font-mono: var(--font-mono-family);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  background: hsl(var(--background));
+  color-scheme: light;
+}
+
+html:has(body[data-theme='dark']) {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  background:
+    linear-gradient(115deg, hsl(43 29% 97% / 0.8), transparent 42%),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-body-family);
+  font-size: 14px;
+  font-feature-settings: 'tnum' 1, 'cv02' 1;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-theme='dark'] {
+  background:
+    linear-gradient(120deg, hsl(188 37% 18% / 0.35), transparent 45%),
+    hsl(var(--background));
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 2px;
+}
+
+::selection {
+  color: hsl(var(--primary-foreground));
+  background: hsl(var(--primary));
+}
+
+.font-display {
+  font-family: var(--font-display-family);
+}
+
+.font-mono-numbers {
+  font-family: var(--font-mono-family);
+  font-variant-numeric: tabular-nums;
+}
+
+.app-grid-texture {
+  background-image:
+    linear-gradient(hsl(var(--border) / 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.22) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.eyebrow {
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono-family);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.industrial-rule {
+  height: 1px;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--border)), transparent);
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--border)) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+
+.animate-fadeIn {
+  animation: fade-in 180ms ease-out both;
+}
+
+.animate-slideUp {
+  animation: slide-up 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
