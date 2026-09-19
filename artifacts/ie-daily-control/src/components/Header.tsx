@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header
       id="app-top-header"
-      className="sticky top-0 z-40 border-b border-[#d9d2c2] bg-[#fbfaf6]/95 backdrop-blur-md transition-colors"
+      className="sticky top-0 z-40 border-b border-[#d9d2c2] bg-[#fbfaf6]/95 backdrop-blur-md transition-colors cockpit-header"
     >
       <div className="mx-auto max-w-[1500px] px-3 sm:px-6">
         <div className="flex h-14 items-center justify-between gap-2 sm:gap-4">
@@ -43,20 +43,20 @@ export const Header: React.FC<HeaderProps> = ({
               aria-label="IE Daily Control Home"
               className="flex items-center gap-2.5 text-left group focus:outline-hidden cursor-pointer"
             >
-              <div className="w-9 h-9 rounded-full bg-[#0c4a60] text-white flex items-center justify-center shadow-xs shrink-0 group-hover:bg-[#083647] transition-colors">
+              <div className="w-9 h-9 rounded-[10px] bg-[hsl(var(--primary))] text-[hsl(var(--accent))] flex items-center justify-center shadow-xs shrink-0 group-hover:bg-[hsl(214_48%_27%)] transition-colors border border-white/10">
                 <Gauge className="w-4.5 h-4.5 stroke-[2]" />
               </div>
               <div className="flex items-center gap-2">
                 <div className="flex flex-col">
-                  <span className="font-extrabold text-xs sm:text-sm tracking-tight text-[#17343a] leading-none uppercase">
+                  <span className="font-extrabold text-xs sm:text-sm tracking-tight text-[#17343a] leading-none uppercase font-display">
                     IE / DAILY
                   </span>
-                  <span className="font-extrabold text-xs sm:text-sm tracking-tight text-[#17343a] leading-none uppercase mt-0.5">
+                  <span className="font-extrabold text-xs sm:text-sm tracking-tight text-[#17343a] leading-none uppercase mt-0.5 font-display">
                     CONTROL
                   </span>
                 </div>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-[#fef3c7] text-[#92400e] border border-[#fde68a]">
-                  PROD
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] border border-[hsl(var(--accent)/.55)]">
+                   LIVE / PROD
                 </span>
               </div>
             </button>

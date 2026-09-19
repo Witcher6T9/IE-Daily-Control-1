@@ -228,12 +228,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
       {/* ────────────────────────────────────────────────────────── */}
       {/* REBUILT COMMAND HERO CARD: Live Clock & IE Command Pulse */}
       {/* ────────────────────────────────────────────────────────── */}
-      <section id="rebuilt-hero-card" className="space-y-4">
+      <section id="rebuilt-hero-card" className="space-y-4 dashboard-command">
         {/* Main Command Hero Container */}
-        <div className="rounded-3xl bg-gradient-to-b from-[#0e2f38] via-[#0a232a] to-[#06161b] text-white border border-[#1b434b] p-5 sm:p-7 shadow-xl relative overflow-hidden space-y-6">
+        <div className="rounded-3xl dispatch-hero text-white border border-[#1b434b] p-5 sm:p-7 shadow-xl relative overflow-hidden space-y-6">
           {/* Ambient Subtle Glows */}
-          <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-teal-400/10 blur-3xl pointer-events-none" />
-          <div className="absolute -left-24 -bottom-24 w-80 h-80 rounded-full bg-sky-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-amber-300/10 blur-3xl pointer-events-none" />
+          <div className="absolute -left-24 -bottom-24 w-80 h-80 rounded-full bg-blue-300/10 blur-3xl pointer-events-none" />
 
           {/* Top Row: Live Clock, Active Shift, User Role, and Telemetry Status */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/10 pb-5 relative z-10">

@@ -140,7 +140,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         >
           <div
             id="bottom-nav-drawer"
-            className="w-full max-w-lg bg-[#fbfaf6] border-t border-x border-[#d9d2c2] rounded-t-3xl p-5 shadow-2xl space-y-4 mb-0 animate-slideUp"
+            className="w-full max-w-lg bg-[#fbfaf6] border-t border-x border-[#d9d2c2] rounded-t-3xl p-5 shadow-2xl space-y-4 mb-0 animate-slideUp cockpit-drawer"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-[#e7e1d5] pb-3">
@@ -281,7 +281,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
       <nav
         id="bottom-navigation-bar"
         aria-label="Bottom Navigation"
-        className="fixed bottom-0 inset-x-0 z-40 bg-[#fbfaf6]/95 backdrop-blur-md border-t border-[#d9d2c2] shadow-[0_-4px_20px_rgba(0,0,0,0.06)] pb-[env(safe-area-inset-bottom)]"
+        className="fixed bottom-0 inset-x-0 z-40 bg-[#fbfaf6]/95 backdrop-blur-md border-t border-[#d9d2c2] shadow-[0_-4px_20px_rgba(12,28,45,0.10)] pb-[env(safe-area-inset-bottom)] cockpit-nav"
       >
         <div className="max-w-[1500px] mx-auto px-2 sm:px-6">
           {/* Mobile View: 5 slots (Home, Lines, Checklist, To-Do, and More/Secondary) */}

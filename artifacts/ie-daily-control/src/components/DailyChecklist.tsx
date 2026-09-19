@@ -89,16 +89,16 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
   return (
     <div className="space-y-6">
       {/* Header & Date Navigation */}
-      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs">
+      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs surface-card checklist-intro">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#dceceb] text-[#176f78]">
+             <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#dceceb] text-[#176f78] section-kicker">
                 Industrial Engineering Daily Standard
               </span>
               <span className="text-xs text-[#527078]">{CHECKLIST_TASK_COUNT}-Task Inspection Protocol</span>
             </div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight">
+             <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight page-title">
               IE Daily Control Checklist
             </h1>
             <p className="text-xs sm:text-sm text-[#527078] mt-1">
@@ -211,9 +211,9 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
           const status = currentStatuses[idx] || 'pending';
 
           return (
-            <div
+             <div
               key={task.id}
-              className={`rounded-2xl border p-4 transition-all duration-200 ${
+               className={`rounded-2xl border p-4 transition-all duration-200 checklist-task ${
                 status === 'yes'
                   ? 'border-emerald-200 bg-[#fbfaf6] shadow-2xs'
                   : status === 'pending'

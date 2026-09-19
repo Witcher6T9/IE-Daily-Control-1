@@ -208,7 +208,7 @@ export const TodoSchedule: React.FC<TodoScheduleProps> = ({
   return (
     <div className="space-y-6 pb-12 animate-fadeIn">
       {/* Top Banner */}
-      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4 surface-card operations-intro">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
             <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#176f78] text-white">
@@ -218,7 +218,7 @@ export const TodoSchedule: React.FC<TodoScheduleProps> = ({
               IE Field Control
             </span>
           </div>
-          <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight">
+          <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight page-title">
             Schedule &amp; Action Item Tracking
           </h1>
           <p className="text-xs sm:text-sm text-[#527078] mt-1">
@@ -469,9 +469,9 @@ export const TodoSchedule: React.FC<TodoScheduleProps> = ({
                 const completedSubs = todo.subtasks.filter(s => s.completed).length;
 
                 return (
-                  <div
+                   <div
                     key={todo.id}
-                    className={`p-4 sm:p-5 rounded-2xl border transition-all ${
+                     className={`p-4 sm:p-5 rounded-2xl border transition-all todo-card ${
                       isCompleted
                         ? 'bg-[#fbfaf6] border-[#d9d2c2] opacity-80'
                         : 'bg-white border-[#d9d2c2] hover:border-[#176f78] shadow-xs'

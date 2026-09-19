@@ -577,7 +577,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased">
+    <div className="cockpit-shell min-h-[100dvh] flex flex-col bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased">
       {/* Top Application Header */}
       <Header
         theme={theme}
@@ -704,7 +704,7 @@ export default function App() {
       </main>
 
       {/* Industrial Engineering Footer */}
-      <footer className="mt-auto border-t border-[#d9d2c2] bg-[#fbfaf6] py-4 pb-20 md:pb-18 text-xs text-[#527078]">
+      <footer className="mt-auto border-t border-[#d9d2c2] bg-[#fbfaf6] py-4 pb-20 md:pb-18 text-xs text-[#527078] cockpit-footer">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <span className="font-bold text-[#17343a]">IE Daily Control</span>

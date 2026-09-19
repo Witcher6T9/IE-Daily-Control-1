@@ -236,7 +236,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
       {/* ────────────────────────────────────────────────────────── */}
       {/* HEADER & MONTH NAVIGATION */}
       {/* ────────────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs">
+       <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs surface-card monthly-intro">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -246,7 +246,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
               </span>
               <span className="text-xs text-[#527078]">IE Daily Control Protocol</span>
             </div>
-            <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight">
+            <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight page-title">
               Monthly Activity & Audit Log
             </h1>
             <p className="text-xs sm:text-sm text-[#527078] mt-1">
@@ -363,7 +363,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
       {/* ────────────────────────────────────────────────────────── */}
       {/* INTERACTIVE CALENDAR UI */}
       {/* ────────────────────────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs space-y-4">
+       <div className="rounded-2xl border border-[#d9d2c2] bg-[#fbfaf6] p-5 sm:p-6 shadow-xs space-y-4 surface-card audit-calendar">
         {/* Calendar Controls & Legend */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#e7e1d5] pb-3">
           <div className="flex items-center gap-2">

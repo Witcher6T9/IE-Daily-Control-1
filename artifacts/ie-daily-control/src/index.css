@@ -2,51 +2,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: 42 24% 94%;
-  --foreground: 193 39% 17%;
-  --card: 43 29% 97%;
-  --card-foreground: 193 39% 17%;
-  --popover: 43 29% 97%;
-  --popover-foreground: 193 39% 17%;
-  --primary: 188 73% 27%;
-  --primary-foreground: 42 24% 96%;
-  --secondary: 40 24% 89%;
-  --secondary-foreground: 193 39% 17%;
-  --muted: 40 18% 87%;
-  --muted-foreground: 193 17% 42%;
-  --accent: 31 88% 58%;
-  --accent-foreground: 193 39% 17%;
-  --destructive: 4 71% 50%;
-  --destructive-foreground: 42 24% 96%;
-  --border: 40 21% 82%;
-  --input: 40 21% 82%;
-  --ring: 188 73% 27%;
-  --radius: 0.75rem;
+  /* Dispatch board palette: pale steel, ink navy, and one unmistakable safety amber. */
+  --background: 210 24% 93%;
+  --foreground: 214 35% 16%;
+  --card: 210 30% 98%;
+  --card-foreground: 214 35% 16%;
+  --popover: 210 30% 98%;
+  --popover-foreground: 214 35% 16%;
+  --primary: 214 48% 21%;
+  --primary-foreground: 44 46% 97%;
+  --secondary: 210 20% 87%;
+  --secondary-foreground: 214 35% 16%;
+  --muted: 210 18% 86%;
+  --muted-foreground: 213 18% 42%;
+  --accent: 39 91% 54%;
+  --accent-foreground: 214 35% 16%;
+  --destructive: 3 66% 47%;
+  --destructive-foreground: 44 46% 97%;
+  --border: 210 18% 78%;
+  --input: 210 18% 78%;
+  --ring: 39 91% 54%;
+  --radius: 0.7rem;
   --font-body-family: 'IBM Plex Sans', ui-sans-serif, sans-serif;
   --font-display-family: 'Barlow Condensed', 'IBM Plex Sans', sans-serif;
   --font-mono-family: 'IBM Plex Mono', ui-monospace, monospace;
 }
 
 [data-theme='dark'] {
-  --background: 193 32% 12%;
-  --foreground: 42 24% 92%;
-  --card: 193 29% 16%;
-  --card-foreground: 42 24% 92%;
-  --popover: 193 29% 16%;
-  --popover-foreground: 42 24% 92%;
-  --primary: 184 52% 48%;
-  --primary-foreground: 193 39% 12%;
-  --secondary: 193 25% 22%;
-  --secondary-foreground: 42 24% 92%;
-  --muted: 193 24% 23%;
-  --muted-foreground: 192 14% 68%;
-  --accent: 31 88% 60%;
-  --accent-foreground: 193 39% 12%;
+  --background: 214 35% 11%;
+  --foreground: 43 34% 92%;
+  --card: 215 30% 15%;
+  --card-foreground: 43 34% 92%;
+  --popover: 215 30% 15%;
+  --popover-foreground: 43 34% 92%;
+  --primary: 39 91% 54%;
+  --primary-foreground: 214 35% 11%;
+  --secondary: 215 25% 21%;
+  --secondary-foreground: 43 34% 92%;
+  --muted: 215 23% 22%;
+  --muted-foreground: 214 14% 70%;
+  --accent: 39 91% 54%;
+  --accent-foreground: 214 35% 11%;
   --destructive: 4 71% 58%;
-  --destructive-foreground: 42 24% 96%;
-  --border: 193 23% 28%;
-  --input: 193 23% 28%;
-  --ring: 184 52% 48%;
+  --destructive-foreground: 43 34% 92%;
+  --border: 214 22% 28%;
+  --input: 214 22% 28%;
+  --ring: 39 91% 54%;
 }
 
 [data-theme='forest'] {
@@ -117,7 +118,7 @@ body {
   min-width: 320px;
   min-height: 100dvh;
   background:
-    linear-gradient(115deg, hsl(43 29% 97% / 0.8), transparent 42%),
+    linear-gradient(135deg, hsl(210 30% 98% / 0.78), transparent 40%),
     hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-body-family);
@@ -169,7 +170,8 @@ textarea:focus-visible {
   background-image:
     linear-gradient(hsl(var(--border) / 0.22) 1px, transparent 1px),
     linear-gradient(90deg, hsl(var(--border) / 0.22) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-size: 22px 22px;
+  background-position: -1px -1px;
 }
 
 .eyebrow {
@@ -183,7 +185,199 @@ textarea:focus-visible {
 
 .industrial-rule {
   height: 1px;
-  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--border)), transparent);
+  background: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--border)), transparent);
+}
+
+/* Shared cockpit primitives. Existing screens keep their ids and data flow,
+   while these classes give every surface the same steel-and-ink language. */
+.cockpit-shell {
+  position: relative;
+}
+
+.cockpit-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: radial-gradient(hsl(var(--foreground) / 0.12) 0.6px, transparent 0.6px);
+  background-size: 6px 6px;
+  mix-blend-mode: multiply;
+  z-index: 60;
+}
+
+.surface-card {
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--card) / 0.92);
+  box-shadow: 0 12px 28px hsl(214 35% 16% / 0.07);
+}
+
+.surface-card:hover {
+  border-color: hsl(var(--primary) / 0.28);
+  box-shadow: 0 16px 34px hsl(214 35% 16% / 0.1);
+}
+
+.section-kicker {
+  color: hsl(var(--muted-foreground));
+  font-family: var(--font-mono-family);
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.action-primary {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: 1px solid hsl(var(--primary));
+  box-shadow: 0 5px 0 hsl(214 48% 13% / 0.22);
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.action-primary:hover {
+  background: hsl(214 48% 27%);
+  transform: translateY(-1px);
+  box-shadow: 0 7px 0 hsl(214 48% 13% / 0.22);
+}
+
+.action-primary:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 hsl(214 48% 13% / 0.22);
+}
+
+.status-accent {
+  color: hsl(214 35% 16%);
+  background: hsl(var(--accent));
+}
+
+.dispatch-hero {
+  background:
+    linear-gradient(118deg, hsl(214 48% 19%) 0%, hsl(214 45% 14%) 56%, hsl(218 42% 11%) 100%);
+  border-color: hsl(39 91% 54% / 0.24) !important;
+}
+
+.dispatch-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image: linear-gradient(90deg, transparent 49%, hsl(43 34% 92% / 0.08) 50%, transparent 51%);
+  background-size: 10px 10px;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+}
+
+.cockpit-header {
+  box-shadow: 0 1px 0 hsl(var(--border)), 0 8px 22px hsl(214 35% 16% / 0.05);
+}
+
+.cockpit-header > div > div {
+  min-height: 4rem;
+}
+
+.cockpit-nav {
+  box-shadow: 0 -10px 28px hsl(214 35% 16% / 0.1) !important;
+}
+
+.cockpit-footer {
+  background: hsl(var(--card) / 0.72) !important;
+}
+
+.page-title {
+  letter-spacing: -0.025em;
+  font-size: clamp(1.75rem, 3vw, 2.65rem);
+}
+
+.checklist-task,
+.todo-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 3px 0 hsl(214 35% 16% / 0.04);
+}
+
+.checklist-task::before,
+.todo-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: hsl(var(--border));
+  transition: background-color 160ms ease;
+}
+
+.checklist-task:has(button.bg-emerald-600)::before,
+.todo-card:has(button.bg-emerald-600)::before {
+  background: hsl(148 57% 42%);
+}
+
+.checklist-intro,
+.operations-intro,
+.monthly-intro {
+  background:
+    linear-gradient(110deg, hsl(var(--card)), hsl(210 33% 96%)) !important;
+}
+
+.audit-calendar {
+  background: hsl(var(--card) / 0.94) !important;
+}
+
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 1.75rem;
+  }
+
+  .cockpit-header > div > div {
+    min-height: 3.7rem;
+  }
+}
+
+/* Compatibility paint for the original screen primitives. This lets the
+   redesign remain in one visual system without rewriting domain logic. */
+[class~="bg-[#fbfaf6]"],
+[class~="bg-white"] {
+  background-color: hsl(var(--card)) !important;
+}
+
+[class~="bg-[#f1eee6]"],
+[class~="bg-[#e7e1d5]"] {
+  background-color: hsl(var(--secondary)) !important;
+}
+
+[class~="border-[#d9d2c2]"],
+[class~="border-[#e7e1d5]"] {
+  border-color: hsl(var(--border)) !important;
+}
+
+[class~="text-[#17343a]"] {
+  color: hsl(var(--foreground)) !important;
+}
+
+[class~="text-[#527078]"] {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+[class~="bg-[#176f78]"] {
+  background-color: hsl(var(--primary)) !important;
+}
+
+[class~="text-[#176f78]"] {
+  color: hsl(var(--primary)) !important;
+}
+
+[class~="bg-[#dceceb]"] {
+  background-color: hsl(202 34% 88%) !important;
+}
+
+[class*="hover\\:bg-[#12555c]"]:hover {
+  background-color: hsl(214 48% 27%) !important;
+}
+
+@media (max-width: 767px) {
+  .cockpit-shell::before {
+    opacity: 0.1;
+  }
 }
 
 .scrollbar-thin {
