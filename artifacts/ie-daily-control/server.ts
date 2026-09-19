@@ -5,6 +5,7 @@
 
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
 import { createServer as createViteServer } from 'vite';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
@@ -22,7 +23,8 @@ function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
 
 async function startServer() {
   const app = express();
-  const PORT = Number(process.env.PORT || 3000);
+  // Port 3000 is the hardcoded entry point for AI Studio environment
+  const PORT = 3000;
 
   app.use(express.json({ limit: '10mb' }));
 
@@ -476,15 +478,20 @@ Return ONLY valid JSON matching this exact structure:
   // Vite middleware in dev or static files in production
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      configFile: path.resolve(import.meta.dirname, 'vite.config.ts'),
+      root: import.meta.dirname,
+      server: { middlewareMode: true, hmr: false },
       appType: 'spa',
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    const candidatePath = path.resolve(import.meta.dirname, 'dist/public');
+    const distPath = fs.existsSync(candidatePath)
+      ? candidatePath
+      : path.resolve(process.cwd(), 'artifacts/ie-daily-control/dist/public');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      res.sendFile(path.resolve(distPath, 'index.html'));
     });
   }
 
