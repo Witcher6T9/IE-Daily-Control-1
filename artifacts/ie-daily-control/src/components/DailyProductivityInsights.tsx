@@ -84,7 +84,7 @@ export const DailyProductivityInsights: React.FC<DailyProductivityInsightsProps>
               <span>Shift Telemetry & Variance</span>
             </span>
             <span className="text-xs text-[#527078] font-medium">
-              Hour 6.5 of 8.0 • Shift A
+              Hour 6.5 of 8.0 • General Shift (8:00 AM - 5:00 PM)
             </span>
           </div>
           <h2 className="font-display text-xl sm:text-2xl font-bold uppercase text-[#17343a] tracking-tight flex items-center gap-2">

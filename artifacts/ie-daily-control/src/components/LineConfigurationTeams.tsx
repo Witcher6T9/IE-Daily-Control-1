@@ -84,7 +84,7 @@ export const LineConfigurationTeams: React.FC<LineConfigurationTeamsProps> = ({
   const [memberName, setMemberName] = useState('');
   const [memberRole, setMemberRole] = useState(DEFAULT_ROLES[0]);
   const [memberContact, setMemberContact] = useState('');
-  const [memberShift, setMemberShift] = useState('Shift 01 (General)');
+  const [memberShift, setMemberShift] = useState('General Shift (8:00 AM - 5:00 PM)');
 
   // Edit existing line modal state
   const [editingLine, setEditingLine] = useState<LineEntry | null>(null);
@@ -1164,9 +1164,9 @@ export const LineConfigurationTeams: React.FC<LineConfigurationTeamsProps> = ({
                   onChange={e => setMemberShift(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-[#d1d5db] text-sm focus:border-[#2563eb] focus:outline-hidden bg-white"
                 >
-                  <option value="Shift 01 (General)">Shift 01 (General / Morning 08:00 - 17:00)</option>
-                  <option value="Shift 02 (Evening)">Shift 02 (Evening Overtime)</option>
-                  <option value="Shift 03 (Night)">Shift 03 (Night Special)</option>
+                  <option value="General Shift (8:00 AM - 5:00 PM)">General Shift (8:00 AM - 5:00 PM) [Default]</option>
+                  <option value="Shift 02 (Evening Overtime 17:00 - 21:00)">Shift 02 (Evening Overtime 17:00 - 21:00)</option>
+                  <option value="Shift 03 (Night Shift 21:00 - 05:00)">Shift 03 (Night Shift 21:00 - 05:00)</option>
                 </select>
               </div>
 

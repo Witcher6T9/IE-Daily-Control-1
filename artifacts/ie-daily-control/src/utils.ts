@@ -541,20 +541,20 @@ export function generateDefaultChecklists(): ChecklistMap {
   const map: ChecklistMap = {};
   const today = getTodayDateStr();
   
-  // Today: 7 completed, 3 pending, 2 no
-  map[today] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'pending', 'pending', 'no', 'no'];
+  // Today: 9 completed, 3 pending, 1 action needed (13 tasks total)
+  map[today] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'pending', 'pending', 'no'];
 
-  // Past 28 days
+  // Past 28 days (13 tasks each)
   for (let i = 1; i <= 28; i++) {
     const dStr = getOffsetDateStr(-i);
     if (i % 5 === 0) {
-      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes'];
+      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes'];
     } else if (i % 3 === 0) {
-      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes'];
+      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes', 'yes'];
     } else if (i % 2 === 0) {
-      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes', 'yes', 'pending', 'yes', 'no', 'yes'];
+      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes', 'yes', 'pending', 'yes', 'no', 'yes', 'yes'];
     } else {
-      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes', 'yes', 'yes'];
+      map[dStr] = ['yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'yes', 'pending', 'yes', 'yes', 'yes', 'yes', 'yes'];
     }
   }
 

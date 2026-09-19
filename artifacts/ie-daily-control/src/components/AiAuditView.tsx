@@ -391,7 +391,7 @@ ${auditReport.kaizenPlan.map(k => `[${k.priority}] ${k.task} (Expected: ${k.impa
           {[
             { id: 'monthly_kpi', label: 'Monthly KPI & Output Trends' },
             { id: 'line_health', label: 'Line-by-Line Health Matrix' },
-            { id: 'checklist_compliance', label: 'IE + SL Checklist Compliance' },
+            { id: 'checklist_compliance', label: 'SL Control Checklist Compliance' },
             { id: 'bottleneck_balancing', label: 'Bottlenecks & Pitch Time' }
           ].map(scope => (
             <button

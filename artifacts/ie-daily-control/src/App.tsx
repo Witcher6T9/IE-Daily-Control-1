@@ -714,8 +714,10 @@ export default function App() {
             <span className="hidden md:inline font-mono-numbers">Release v2.4.0</span>
           </div>
 
-          <div className="flex items-center gap-4 font-mono-numbers text-[11px]">
+          <div className="flex items-center gap-4 font-mono-numbers text-[11px] flex-wrap">
             <span>Active Unit: Plant #1 ({profile.assignedUnit})</span>
+            <span>•</span>
+            <span className="text-[#176f78] font-bold">{profile.shift || 'General Shift (8:00 AM - 5:00 PM)'}</span>
             <span>•</span>
             <span className="text-emerald-700 font-bold">Cloud Sync 100% OK</span>
           </div>

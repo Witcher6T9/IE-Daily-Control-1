@@ -85,7 +85,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
     {
       id: 'checklist',
       label: 'Checklist',
-      fullLabel: 'Daily IE + SL Checklist',
+      fullLabel: 'SL Control Check List',
       icon: CheckSquare,
       badge: `${checklistProgress}%`
     },

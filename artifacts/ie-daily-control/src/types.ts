@@ -344,6 +344,7 @@ export interface UserProfile {
   email: string;
   employeeId?: string;
   assignedUnit?: string;
+  shift?: string;
 }
 
 export interface SyncState {

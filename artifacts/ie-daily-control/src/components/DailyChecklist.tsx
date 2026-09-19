@@ -40,11 +40,19 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
   onNavigate
 }) => {
   const [taskNotes, setTaskNotes] = useState<Record<number, string>>({
-    0: 'Ramp-up target communicated to Line 21 supervisor.',
-    1: 'Day 2 balance graph verified for Line 19 zipper operation.',
-    2: 'Peak 70% threshold reached on Line 20.',
-    3: 'Line 18 Day 4 peak achieved at 90% efficiency.',
-    5: 'Stopwatch study completed on collar attach station.'
+    0: 'Ramp-up milestones and operator loading plan aligned with supervisor.',
+    1: '1st vs 2nd day balance graph logged; cycle variance minimized.',
+    2: '70% production target achieved on Line 20.',
+    3: '4th day graph completed; bottleneck station cycle balanced.',
+    4: 'Day 6-7 estimate prepared with manpower and efficiency evidence.',
+    5: 'Collar attach station analyzed; countermeasure applied.',
+    6: 'Tech pack and trims confirmed 10 days ahead.',
+    7: 'T.R sample passed initial audit; 2 open actions tracked.',
+    8: 'Shift A floor status logged across all active lines.',
+    9: 'Critical station operators tracked; helper assigned to Line 19.',
+    10: 'Pneumatic thread wiper jig installed; saved 3.2s per piece.',
+    11: 'Shift running efficiency logged at 87.4% against 85% target.',
+    12: 'Tomorrow line target forecast calculated based on line balance.'
   });
 
   const currentStatuses: ChecklistStatus[] = normalizeChecklistStatuses(checklists[selectedDate]);
@@ -93,16 +101,16 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
-             <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#dceceb] text-[#176f78] section-kicker">
-                Industrial Engineering Daily Standard
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-[#dceceb] text-[#176f78] section-kicker">
+                SL Control Inspection Standard
               </span>
-              <span className="text-xs text-[#527078]">{CHECKLIST_TASK_COUNT}-Task Inspection Protocol</span>
+              <span className="text-xs text-[#527078]">{CHECKLIST_TASK_COUNT}-Task Verification Protocol</span>
             </div>
-             <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight page-title">
-              IE Daily Control Checklist
+            <h1 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#17343a] tracking-tight page-title">
+              SL Control Check List
             </h1>
             <p className="text-xs sm:text-sm text-[#527078] mt-1">
-              Ensure floor balancing, learning curve progression, bottleneck studies, and sample approvals are audited daily.
+              Audit learning curve plans, line balancing graphs, bottleneck flow, style input dates, T.R samples, operator tracking, and shift targets.
             </p>
           </div>
 
@@ -307,7 +315,7 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
           <div>
             <div className="flex items-center gap-2">
               <h4 className="font-bold text-sm text-[#17343a]">
-                IE Daily Floor Audit Verification
+                SL Control Floor Audit Verification
               </h4>
               <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">
                 Audited & Approved
@@ -320,7 +328,7 @@ export const DailyChecklist: React.FC<DailyChecklistProps> = ({
         </div>
 
         <div className="text-right text-xs font-mono-numbers text-[#527078] border-t sm:border-t-0 pt-3 sm:pt-0 border-[#e7e1d5]">
-          <div>Shift Verification ID: #IE-CHK-{selectedDate.replace(/-/g, '')}</div>
+          <div>Shift Verification ID: #SL-CHK-{selectedDate.replace(/-/g, '')}</div>
           <div className="text-[10px] text-emerald-600 font-bold mt-0.5">
             Compliance Score: {completionPercentage}%
           </div>

@@ -748,7 +748,7 @@ export const Reports: React.FC<ReportsProps> = ({ lines, todayDate, profile, onN
                 Garment Line Efficiency &amp; Shift Telemetry Matrix
               </h2>
               <div className="text-xs text-slate-500 font-medium mt-0.5">
-                Shift Date: <strong>{formatDateLabel(reportDate)}</strong> • Factory Unit: Plant #1 • Showing {filteredLines.length} Lines
+                Shift Date: <strong>{formatDateLabel(reportDate)}</strong> • Shift: <strong>General Shift (8:00 AM - 5:00 PM)</strong> • Factory Unit: Plant #1 • Showing {filteredLines.length} Lines
               </div>
             </div>
 

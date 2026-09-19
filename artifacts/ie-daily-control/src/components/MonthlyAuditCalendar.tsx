@@ -250,7 +250,7 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
               Monthly Activity & Audit Log
             </h1>
             <p className="text-xs sm:text-sm text-[#527078] mt-1">
-              Calendar tracking of the {CHECKLIST_TASK_COUNT}-Task IE Daily Control Checklist, auditor verification trails, and floor compliance trends.
+              Calendar tracking of the {CHECKLIST_TASK_COUNT}-Task SL Control Check List, auditor verification trails, and floor compliance trends.
             </p>
           </div>
 
@@ -573,10 +573,10 @@ export const MonthlyAuditCalendar: React.FC<MonthlyAuditCalendarProps> = ({
           </div>
         </div>
 
-        {/* Full IE + SL audit breakdown table */}
+        {/* SL Control audit breakdown table */}
         <div className="space-y-2">
           <div className="text-xs font-bold uppercase tracking-wider text-[#527078] mb-1">
-            Standard IE + SL Inspection Checkpoints for this Date:
+            SL Control Inspection Checkpoints for this Date:
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

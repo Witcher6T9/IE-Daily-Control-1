@@ -33,6 +33,7 @@ export const UserModal: React.FC<UserModalProps> = ({
   const [email, setEmail] = useState<string>(profile.email);
   const [employeeId, setEmployeeId] = useState<string>(profile.employeeId || 'IE-9042');
   const [assignedUnit, setAssignedUnit] = useState<string>(profile.assignedUnit || 'Unit 01 (Sewing)');
+  const [shift, setShift] = useState<string>(profile.shift || 'General Shift (8:00 AM - 5:00 PM)');
   const [selectedTierId, setSelectedTierId] = useState<string>(profile.tierId || 'tier_1');
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
@@ -50,6 +51,7 @@ export const UserModal: React.FC<UserModalProps> = ({
       email: email.trim(),
       employeeId: employeeId.trim(),
       assignedUnit: assignedUnit.trim(),
+      shift: shift.trim(),
       jobTitle: currentRoleTier.name,
       tierId: selectedTierId,
       role: systemRole
@@ -103,10 +105,12 @@ export const UserModal: React.FC<UserModalProps> = ({
                 </span>
               </div>
               <p className="text-xs text-[#527078]">{currentRoleTier.name}</p>
-              <div className="flex items-center gap-2 mt-1 text-[11px] text-[#527078]">
+              <div className="flex items-center gap-2 mt-1 text-[11px] text-[#527078] flex-wrap">
                 <span className="font-mono-numbers">{employeeId}</span>
                 <span>•</span>
                 <span>{assignedUnit}</span>
+                <span>•</span>
+                <span className="text-[#176f78] font-bold">{shift}</span>
               </div>
             </div>
           </div>
@@ -168,6 +172,22 @@ export const UserModal: React.FC<UserModalProps> = ({
                   className="w-full pl-8 pr-3 py-2 rounded-xl border border-[#d9d2c2] text-xs text-[#17343a] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#176f78]"
                 />
               </div>
+            </div>
+
+            {/* Assigned Shift Selection */}
+            <div>
+              <label className="block text-[11px] font-bold uppercase text-[#527078] mb-1">
+                Assigned Operational Shift
+              </label>
+              <select
+                value={shift}
+                onChange={e => setShift(e.target.value)}
+                className="w-full px-3 py-2 rounded-xl border border-[#d9d2c2] text-xs text-[#17343a] bg-white focus:outline-hidden focus:ring-1 focus:ring-[#176f78]"
+              >
+                <option value="General Shift (8:00 AM - 5:00 PM)">General Shift 8:00 AM to 5:00 PM (Standard Default)</option>
+                <option value="Shift 02 (Evening Overtime 17:00 - 21:00)">Shift 02 (Evening Overtime 17:00 - 21:00)</option>
+                <option value="Shift 03 (Night Shift 21:00 - 05:00)">Shift 03 (Night Shift 21:00 - 05:00)</option>
+              </select>
             </div>
 
             {/* Role Tier Selection */}

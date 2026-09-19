@@ -107,8 +107,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
         isBeforeShift: true,
         phaseName: 'Pre-Shift Line Preparation & Morning Top 5 Stand-Up',
         pct: 0,
-        elapsedText: 'Pre-Shift (08:00 Start)',
-        remainingText: 'Full 8h Shift Ahead'
+        elapsedText: 'Pre-Shift (08:00 AM Start)',
+        remainingText: 'Full 8h General Shift Ahead'
       };
     } else if (currentMinFromMidnight >= shiftEndMin) {
       return {
@@ -116,7 +116,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         phaseName: 'Shift Completed • Evening IE Reconciliation',
         pct: 100,
         elapsedText: 'Full 8h Shift Completed',
-        remainingText: 'Shift 01 Concluded'
+        remainingText: 'General Shift Concluded'
       };
     } else {
       const elapsedMin = currentMinFromMidnight - shiftStartMin;
@@ -261,8 +261,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 >
                   {formattedLiveTime}
                 </span>
-                <div className="text-xs text-sky-200/80 font-mono-numbers">
-                  Shift 01 (08:00 - 17:00)
+                <div className="text-xs text-sky-200/90 font-mono-numbers flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+                  <span>General Shift (8:00 AM - 5:00 PM)</span>
                 </div>
               </div>
 
@@ -530,8 +531,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
               )}
             </div>
 
-            <span className="text-[11px] text-sky-200/70 font-mono-numbers">
-              Shift Time Window: 08:00 - 17:00 • 8.0 Std Hours
+            <span className="text-[11px] text-sky-200/80 font-mono-numbers">
+              Default Shift: General Shift 8:00 AM to 5:00 PM • 8.0 Std Hours
             </span>
           </div>
         </div>

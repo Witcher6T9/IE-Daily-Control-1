@@ -185,86 +185,86 @@ export const IE_12_TASKS = [
 
 export const SL_TASKS = [
   {
-    id: 13,
+    id: 1,
     category: 'SL Control',
     title: 'Learning Curve Plan',
     hint: 'Set the style ramp-up plan, daily efficiency milestones, operator loading, and review owners.'
   },
   {
-    id: 14,
+    id: 2,
     category: 'SL Control',
     title: 'Line Balancing Graph (1st Day Output - 2nd Day Completion)',
     hint: 'Compare first-day output against second-day completion and record the balancing actions needed to close the gap.'
   },
   {
-    id: 15,
+    id: 3,
     category: 'SL Control',
     title: 'Learning Curve First 3 Days (Pick Target 70% Production)',
     hint: 'Verify the first three-day learning curve and confirm the 70% production pick target is realistic.'
   },
   {
-    id: 16,
+    id: 4,
     category: 'SL Control',
     title: 'Line Balancing Graph - 4th Day',
     hint: 'Review the fourth-day balance graph, cycle-time spread, and any remaining overloaded operations.'
   },
   {
-    id: 17,
+    id: 5,
     category: 'SL Control',
     title: 'Line Estimate Report (6-7 Day)',
     hint: 'Prepare the six-to-seven-day line estimate using output, efficiency, manpower, and learning-curve evidence.'
   },
   {
-    id: 18,
+    id: 6,
     category: 'SL Control',
     title: 'Line Study & Bottleneck Flow Analysis',
     hint: 'Study the line flow, isolate the bottleneck operation, and document the countermeasure path.'
   },
   {
-    id: 19,
+    id: 7,
     category: 'SL Control',
     title: 'Next Style Input Date File Submit (Before 10 Days)',
     hint: 'Submit the next-style input date file at least ten days before changeover and flag missing inputs.'
   },
   {
-    id: 20,
+    id: 8,
     category: 'SL Control',
     title: 'T.R Sample Make Follow-up Update',
     hint: 'Follow up on the T.R sample make, capture the latest status, and record open technical actions.'
   },
   {
-    id: 21,
+    id: 9,
     category: 'SL Control',
     title: 'Floor Status Update',
     hint: 'Update floor status across active lines, manpower, machines, WIP, quality, and immediate risks.'
   },
   {
-    id: 22,
+    id: 10,
     category: 'SL Control',
     title: 'Individual Operator Performance Tracking',
     hint: 'Track operator performance, attendance, skill progression, and support needs at critical stations.'
   },
   {
-    id: 23,
+    id: 11,
     category: 'SL Control',
     title: 'Kaizen Work / Continuous Improvement',
     hint: 'Log the active Kaizen or continuous-improvement work, owner, expected benefit, and verification date.'
   },
   {
-    id: 24,
+    id: 12,
     category: 'SL Control',
     title: 'Running Line Efficiency % & Production',
     hint: 'Record running line efficiency and production against target for the current shift.'
   },
   {
-    id: 25,
+    id: 13,
     category: 'SL Control',
     title: 'Tomorrow Target Forecast Report',
     hint: 'Forecast tomorrow’s target using current output, learning curve, manpower, style readiness, and constraints.'
   }
 ] as const;
 
-export const IE_DAILY_TASKS = [...IE_12_TASKS, ...SL_TASKS];
+export const IE_DAILY_TASKS = [...SL_TASKS];
 export const CHECKLIST_TASK_COUNT = IE_DAILY_TASKS.length;
 
 export function normalizeChecklistStatuses(statuses?: ChecklistStatus[]): ChecklistStatus[] {
@@ -518,7 +518,8 @@ export const DEFAULT_USER_PROFILE: UserProfile = {
   tierId: 'tier_1',
   email: 'ashikhossainkr@gmail.com',
   employeeId: 'IE-7701',
-  assignedUnit: 'Unit 4 - Knit Garments Floor'
+  assignedUnit: 'Unit 4 - Knit Garments Floor',
+  shift: 'General Shift (8:00 AM - 5:00 PM)'
 };
 
 export const DEFAULT_DASHBOARD_LAYOUT: DashboardLayout = {
@@ -938,7 +939,7 @@ export const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   },
   {
     id: 'notif-3',
-    title: 'IE + SL Daily Checklist Pending',
+    title: 'SL Control Check List Pending',
     message: 'Tasks remain for today’s inspection sign-off. Please complete before 05:00 PM.',
     type: 'todo',
     timestamp: '01:00 PM',
